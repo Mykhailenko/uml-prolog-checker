@@ -22,7 +22,7 @@ public class StartCheckListener implements ActionListener {
 		if (nodes == null || nodes.size() == 0) {
 
 		} else {
-			StartCheckScenery.run(nodes);
+			StartCheckScenery.run(nodes, panel.isUseJava());
 			System.out.println(ClassGraph.getAssociations().size());
 			Client.getClient().verified();
 		}

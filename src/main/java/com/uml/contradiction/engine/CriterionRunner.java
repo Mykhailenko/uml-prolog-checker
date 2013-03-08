@@ -13,7 +13,7 @@ public class CriterionRunner extends Thread {
 
 	@Override
 	public void run() {
-		Checker engine = new Checker(criterion);
+		JavaChecker engine = new JavaChecker(criterion);
 		result = engine.verify();
 	}
 

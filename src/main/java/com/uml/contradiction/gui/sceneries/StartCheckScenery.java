@@ -10,8 +10,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
 
 import com.uml.contradiction.engine.RunCriterions;
+import com.uml.contradiction.engine.RunCriterionsJava;
 import com.uml.contradiction.engine.model.VerificationResult;
 import com.uml.contradiction.engine.model.criteria.Criterion;
+import com.uml.contradiction.engine.prolog.RunCriterionsProlog;
 import com.uml.contradiction.gui.Client;
 import com.uml.contradiction.gui.components.ProgressDialog;
 import com.uml.contradiction.gui.controllers.PanelsController;
@@ -20,7 +22,7 @@ import com.uml.contradiction.gui.panels.VerificationResultsPanel;
 
 public class StartCheckScenery {
 
-	public static void run(final List<DefaultMutableTreeNode> nodes) {
+	public static void run(final List<DefaultMutableTreeNode> nodes, final boolean useJava) {
 		final JDialog dialog = new ProgressDialog("verifying...");
 		new Thread(new Runnable() {
 
@@ -32,7 +34,7 @@ public class StartCheckScenery {
 					List<Criterion> selectedCriterions = getSelectedCriterions(newRoot);
 					Map<Criterion, VerificationResult> results = new HashMap<Criterion, VerificationResult>();
 					List<VerificationResult> ver = StartCheckScenery
-							.verifyCriterions(selectedCriterions);
+							.verifyCriterions(selectedCriterions, useJava);
 					for (VerificationResult vr : ver) {
 						results.put(vr.getCriterion(), vr);
 					}
@@ -50,8 +52,13 @@ public class StartCheckScenery {
 	}
 
 	public static List<VerificationResult> verifyCriterions(
-			List<Criterion> criterions) {
-		RunCriterions runCriterion = new RunCriterions();
+			List<Criterion> criterions, boolean useJava) {
+		RunCriterions runCriterion;
+		if(useJava){
+			runCriterion = new RunCriterionsJava();
+		}else{
+			runCriterion = new RunCriterionsProlog();
+		}
 		List<VerificationResult> ver = runCriterion.run(criterions);
 		Client.setLastResults(ver);
 		return ver;

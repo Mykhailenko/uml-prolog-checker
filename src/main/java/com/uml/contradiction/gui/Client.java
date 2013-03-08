@@ -70,7 +70,8 @@ public class Client implements GUIState {
 		if (file.exists()) {
 			XMIConverter.setFileAndParse(file);
 			List<VerificationResult> results = StartCheckScenery
-					.verifyCriterions(CriterionSuite.getAllCriterion());
+					.verifyCriterions(CriterionSuite.getAllCriterion(), 
+							PanelsController.contradictionsPanel.isUseJava());
 			Exporter exporter;
 			if (txtExporter) {
 				exporter = new TxtExporter();

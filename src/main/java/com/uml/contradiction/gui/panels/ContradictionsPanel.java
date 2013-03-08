@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -39,7 +40,8 @@ public class ContradictionsPanel extends JPanel implements GUIState {
 	private CheckTreeManager checkTreeManager;
 	private final JLabel imgLbl = new JLabel();
 	private JLabel numOfSelected;
-
+	private JCheckBox jCheckBox;
+	
 	public ContradictionsPanel() {
 		super();
 		createGUI();
@@ -108,6 +110,12 @@ public class ContradictionsPanel extends JPanel implements GUIState {
 		this.add(treePanel);
 		this.add(descriptionPanel);
 		this.add(verify);
+		
+		jCheckBox = new JCheckBox("use Java? ");
+		jCheckBox.setSelected(false);
+		jCheckBox.setBounds(130, 510, 100, 25);
+		this.add(jCheckBox);
+		
 		this.add(imgLbl);
 
 		this.updateUI();
@@ -195,6 +203,10 @@ public class ContradictionsPanel extends JPanel implements GUIState {
 
 	public JTree getTree() {
 		return tree;
+	}
+	
+	public boolean isUseJava(){
+		return jCheckBox.isSelected();
 	}
 
 	public String stringForLabelNumOfSelected() {

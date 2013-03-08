@@ -16,12 +16,15 @@ import com.uml.contradiction.engine.model.VerificationResult;
 import com.uml.contradiction.engine.model.criteria.Criterion;
 import com.uml.contradiction.engine.model.mapping.exception.MappingException;
 
-public class Checker {
+public class JavaChecker {
 	private static final Logger LOGGER = Logger.getRootLogger();
 	private Criterion criterion;
 	private List<HistoryItem> wholeHistory;
 	private List<HistoryItem> failHistory;
 
+	/* (non-Javadoc)
+	 * @see com.uml.contradiction.engine.IChecker#verify()
+	 */
 	@SuppressWarnings("unchecked")
 	public VerificationResult verify() {
 		Quantifier quantifier = criterion.getQuantifiers().get(0);
@@ -232,7 +235,7 @@ public class Checker {
 		}
 	}
 
-	public Checker(Criterion criterion) {
+	public JavaChecker(Criterion criterion) {
 		this.criterion = criterion;
 		this.wholeHistory = new LinkedList<HistoryItem>();
 	}
